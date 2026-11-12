@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pousada Vó Vevinha | Conforto e Tradição</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vevinha: {
+                            50: '#FAF8F5',   // Sand / Cream
+                            100: '#F4EFE6',
+                            200: '#E6DBC9',
+                            600: '#4A6B5D',  // Sage Green
+                            700: '#3B5249',
+                            800: '#2A3C35',
+                            900: '#1D2A25',
+                            terracotta: '#D97745',
+                            terracottaHover: '#C16232',
+                            warmGold: '#D4A359'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(29, 42, 37, 0.70) 0%, rgba(29, 42, 37, 0.45) 50%, rgba(29, 42, 37, 0.85) 100%);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Pulse Animation for Floating WhatsApp Button */
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); }
+            50% { transform: scale(1.06); box-shadow: 0 20px 30px -5px rgba(16, 185, 129, 0.6); }
+        }
+        .whatsapp-float-anim {
+            animation: pulse-subtle 3s infinite ease-in-out;
+        }
+
+        /* EFEITO DE SURGIR AO ROLAR A PÁGINA (Fade-in Up) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efeito de delay em cascata para itens do mesmo bloco */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4EFE6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A6B5D;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-vevinha-50 text-slate-800 antialiased selection:bg-vevinha-600 selection:text-white pb-12 sm:pb-0 overflow-x-hidden">
+
+    <!-- FLOATING WHATSAPP BUTTON (ALWAYS VISIBLE IN BOTTOM RIGHT) -->
+    <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20disponibilidade%20e%20valores%20para%20reserva%20na%20Pousada%20V%C3%B3%20Vevinha." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Fazer reserva pelo WhatsApp"
+       class="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 whatsapp-float-anim group">
+        <i class="fa-brands fa-whatsapp text-3xl sm:text-4xl"></i>
+        <!-- Tooltip for Desktop -->
+        <span class="absolute right-16 sm:right-20 bg-slate-900 text-white text-xs font-semibold py-2 px-3.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-xl pointer-events-none hidden sm:flex items-center gap-2 border border-slate-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            Reservar pelo WhatsApp
+        </span>
+    </a>
+
+    <!-- Top Info Bar -->
+    <div class="bg-vevinha-900 text-vevinha-100 text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <div class="flex items-center gap-4">
+                <span><i class="fa-solid fa-location-dot text-vevinha-terracotta mr-1.5"></i> Luminárias, MG</span>
+                <span class="hidden md:inline">|</span>
+                <span><i class="fa-solid fa-mug-hot text-vevinha-warmGold mr-1.5"></i> Café da Manhã Completo Incluso</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Pousada%20V%C3%B3%20Vevinha." target="_blank" class="hover:text-emerald-400 transition flex items-center gap-1 font-medium">
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> (35) 99723-7258
+                </a>
+                <div class="flex gap-3 text-vevinha-200">
+                    <a href="https://www.instagram.com/pousada_vovevinha/" target="_blank" class="hover:text-white transition" aria-label="Instagram"><i class="fa-brands fa-instagram text-sm"></i></a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-vevinha-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4 xl:gap-8">
+                
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center gap-2 sm:gap-3 group shrink-0">
+                    <img src="Logo.png" alt="Logo Pousada Vó Vevinha" class="w-16 h-16 xl:w-20 xl:h-20 object-contain transform group-hover:scale-105 transition-transform duration-300">
+                    <div>
+                        <span class="font-serif text-lg sm:text-2xl font-bold tracking-tight text-vevinha-900 block leading-none">Pousada Vó Vevinha</span>
+                        <span class="text-[9px] sm:text-[10px] tracking-widest uppercase text-vevinha-terracotta font-semibold block mt-1">Hospitalidade & Carinho</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center justify-center space-x-5 xl:space-x-10 font-medium text-vevinha-800 text-sm whitespace-nowrap mx-auto">
+                    <a href="#inicio" class="hover:text-vevinha-700 transition">Início</a>
+                    <a href="#sobre" class="hover:text-vevinha-700 transition">A Pousada</a>
+                    <a href="#quartos" class="hover:text-vevinha-700 transition">Acomodações</a>
+                    <a href="#cafe" class="hover:text-vevinha-700 transition">Café da Vó</a>
+                    <a href="#atracoes" class="hover:text-vevinha-700 transition">Atrações Turísticas</a>
+                    <a href="#contato" class="hover:text-vevinha-700 transition">Contato</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20reservar%20uma%20estadia%20na%20Pousada%20V%C3%B3%20Vevinha." 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white px-4 sm:px-5 py-2.5 rounded-full font-semibold text-xs sm:text-sm transition duration-300 shadow-md hover:shadow-lg flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
+                        <span>Reservar pelo WhatsApp</span>
+                    </a>
+                    
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-vevinha-200 focus:outline-none" aria-label="Abrir Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-vevinha-50 border-b border-vevinha-200 px-6 pt-3 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">Início</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">A Pousada</a>
+            <a href="#quartos" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">Acomodações</a>
+            <a href="#cafe" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">Café da Vó</a>
+            <a href="#atracoes" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">Atrações Turísticas</a>
+            <a href="#avaliacoes" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600 border-b border-vevinha-200">Depoimentos</a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-medium hover:text-vevinha-600">Contato & Localização</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center bg-vevinha-900 text-white overflow-hidden py-16">
+        <div class="absolute inset-0 z-0">
+            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                 onerror="this.src='https://placehold.co/1920x1080/2A3C35/FAF8F5?text=Pousada+Vo+Vevinha'" 
+                 alt="Pousada Vó Vevinha paisagem" 
+                 class="w-full h-full object-cover object-center transform scale-105 animate-[pulse_15s_infinite]">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center reveal active">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-vevinha-100 text-xs font-semibold tracking-wider uppercase mb-6 border border-white/30">
+                <i class="fa-solid fa-heart text-amber-300"></i> O acolhimento de um lar na serra
+            </span>
+            
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-6 text-shadow">
+                Seja bem-vindo à<br class="hidden sm:inline"> Pousada Vó Vevinha
+            </h1>
+            
+            <p class="text-base sm:text-xl text-vevinha-100 max-w-3xl mx-auto font-light leading-relaxed mb-8 text-shadow px-2">
+                Momentos inesquecíveis de puro conforto, com o carinho do café caseiro artesanal, suítes aconchegantes e atendimento direto e humanizado.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto sm:max-w-none">
+                <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20verificar%20a%20disponibilidade%20e%20fazer%20uma%20reserva%20na%20Pousada%20V%C3%B3%20Vevinha." 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-full text-base font-bold transition duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Reservar pelo WhatsApp</span>
+                </a>
+                <a href="#sobre" class="w-full sm:w-auto bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/40 px-7 py-4 rounded-full text-base font-medium transition duration-300 flex items-center justify-center gap-2 hover:-translate-y-1">
+                    <span>Conhecer a Pousada</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Highlights Bar -->
+    <section class="py-10 bg-vevinha-50 border-b border-vevinha-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+                <!-- Adicionado hover suave nos cartões -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 border border-vevinha-200 reveal">
+                    <i class="fa-solid fa-mug-saucer text-2xl sm:text-3xl text-vevinha-terracotta mb-2 sm:mb-3"></i>
+                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">Café da Vó Vevinha</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-500 mt-1">Quitutes e bolos feitos na pousada</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-2xl bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 border border-vevinha-200 reveal delay-100">
+                    <i class="fa-solid fa-wifi text-2xl sm:text-3xl text-vevinha-terracotta mb-2 sm:mb-3"></i>
+                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">Wi-Fi Gratuito</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-500 mt-1">Conexão em toda a pousada</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-2xl bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 border border-vevinha-200 reveal delay-200">
+                    <i class="fa-solid fa-car text-2xl sm:text-3xl text-vevinha-terracotta mb-2 sm:mb-3"></i>
+                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">Estacionamento</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-500 mt-1">Vaga segura e gratuita</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-2xl bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 border border-vevinha-200 reveal delay-300">
+                    <i class="fa-solid fa-bell-concierge text-2xl sm:text-3xl text-vevinha-terracotta mb-2 sm:mb-3"></i>
+                    <h3 class="font-bold text-slate-800 text-xs sm:text-sm">Atendimento</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-500 mt-1">Cuidado e atenção total</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre A Pousada Section -->
+    <section id="sobre" class="py-14 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div class="reveal">
+                    <span class="text-xs font-bold uppercase tracking-widest text-vevinha-terracotta bg-vevinha-100 px-3.5 py-1.5 rounded-full">
+                        Nossa História & Essência
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-4xl font-bold text-vevinha-900 mt-4 mb-5 leading-tight">
+                        A simplicidade e o carinho de quem ama receber bem
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4 font-light">
+                        A <strong>Pousada Vó Vevinha</strong> foi criada para proporcionar aos hóspedes a sensação inigualável de ser acolhido na casa de vó. Cada detalhe, do cheirinho de bolo assando ao conforto das nossas camas, foi pensado para oferecer descanso de verdade.
+                    </p>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-light">
+                        Estamos situados a poucos minutos das principais atrações turísticas da cidade, permitindo passeios incríveis pelas cachoeiras e no centro histórico, sem abrir mão do silêncio e da paz à noite.
+                    </p>
+
+                    <!-- Features Checklist -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-vevinha-100 text-vevinha-700 flex items-center justify-center shrink-0 text-xs">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800">Atendimento 100% Personalizado</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-vevinha-100 text-vevinha-700 flex items-center justify-center shrink-0 text-xs">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800">Café da Manhã Colonial</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-vevinha-100 text-vevinha-700 flex items-center justify-center shrink-0 text-xs">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800">Estacionamento Gratuito</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-vevinha-100 text-vevinha-700 flex items-center justify-center shrink-0 text-xs">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800">Wi-Fi nas Suítes e Áreas Sociais</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Quero%20saber%20mais%20detalhes%20sobre%20a%20Pousada%20V%C3%B3%20Vevinha." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-full text-sm transition shadow-md hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Falar Conosco no WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Photos Grid com efeito de Zoom -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-4 reveal delay-200">
+                    <div class="overflow-hidden rounded-2xl shadow-md h-48 sm:h-72">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/600x800/4A6B5D/FAF8F5?text=Pousada+Exterior'" 
+                             alt="Pousada Vó Vevinha jardim" 
+                             class="object-cover w-full h-full hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl shadow-md h-48 sm:h-72">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/600x400/4A6B5D/FAF8F5?text=Ambiente+Interno'" 
+                             alt="Ambiente aconchegante" 
+                             class="object-cover w-full h-full hover:scale-110 transition-transform duration-700">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations Section / Quartos -->
+    <section id="quartos" class="py-14 sm:py-20 bg-vevinha-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-10 reveal">
+                <span class="text-xs font-bold uppercase tracking-widest text-vevinha-terracotta bg-white px-3.5 py-1.5 rounded-full shadow-sm">
+                    Aconchego Sob Medida
+                </span>
+                <h2 class="font-serif text-2xl sm:text-4xl font-bold text-vevinha-900 mt-4 mb-3">
+                    Nossas Acomodações
+                </h2>
+                <p class="text-slate-600 text-xs sm:text-sm font-light">
+                    Quartos higienizados, confortáveis e equipados para proporcionar noites relaxantes no clima da serra.
+                </p>
+            </div>
+
+            <!-- Rooms Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Room Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between border border-vevinha-200 group reveal">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Suite+Master'" 
+                                 alt="Suíte Master da Vó" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-3 left-3 bg-vevinha-terracotta text-white text-[11px] font-bold px-3 py-1 rounded-full shadow z-10">
+                                XXXXXXXX
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif text-xl font-bold text-vevinha-900 mb-2">Suíte Master da Vó</h3>
+                            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                                XXXXXXXXXXXX King Size com enxoval macio.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-hot-tub-person text-vevinha-600 mr-1"></i> Hidromassagem</span>
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-fire text-vevinha-600 mr-1"></i> Lareira</span>
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-wifi text-vevinha-600 mr-1"></i> Wi-Fi High Speed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 border-t border-vevinha-100 mt-auto">
+                        <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20valores%20e%20reservar%20a%20*Su%C3%ADte%20Master%20da%20V%C3%B3*." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl transition duration-200 text-xs sm:text-sm flex items-center justify-center gap-2 shadow">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Reservar pelo WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Room Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between border border-vevinha-200 group reveal delay-100">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Chale+Aconchego'" 
+                                 alt="Chalé Aconchego das Montanhas" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-3 left-3 bg-vevinha-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow z-10">
+                                Vista Panorâmica
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif text-xl font-bold text-vevinha-900 mb-2">Chalé Aconchego</h3>
+                            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                                Chalé privativo com sacada espaçosa, rede de descanso, vista para o pôr do sol e ar-condicionado quente/frio.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-mountain text-vevinha-600 mr-1"></i> Sacada Priv.</span>
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-tv text-vevinha-600 mr-1"></i> TV</span>
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-snowflake text-vevinha-600 mr-1"></i> Ventilador</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 border-t border-vevinha-100 mt-auto">
+                        <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20valores%20e%20reservar%20o%20*Chal%C3%A9%20Aconchego*." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl transition duration-200 text-xs sm:text-sm flex items-center justify-center gap-2 shadow">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Reservar pelo WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Room Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between border border-vevinha-200 group reveal delay-200">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Suite+Familia'" 
+                                 alt="Apartamento Família" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-3 left-3 bg-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow z-10">
+                                Família (até 4 pessoas)
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif text-xl font-bold text-vevinha-900 mb-2">Apartamento Família</h3>
+                            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                                Amplo espaço, ideal para quem viaja com filhos ou em grupo pequeno.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-users text-vevinha-600 mr-1"></i> 2 Ambientes</span>
+                                <span class="bg-vevinha-50 text-slate-700 text-[10px] px-2.5 py-1 rounded-md border border-vevinha-200"><i class="fa-solid fa-bed text-vevinha-600 mr-1"></i> Queen + Solteiro</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 border-t border-vevinha-100 mt-auto">
+                        <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20valores%20e%20reservar%20o%20*Apartamento%20Fam%C3%ADlia*." 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl transition duration-200 text-xs sm:text-sm flex items-center justify-center gap-2 shadow">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Reservar pelo WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Breakfast Section / Café da Vó -->
+    <section id="cafe" class="py-14 sm:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                
+                <div class="order-2 lg:order-1 reveal">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        <div class="overflow-hidden rounded-2xl shadow-sm h-48 w-full">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/600x600/4A6B5D/FAF8F5?text=Paes+Caseiros'" 
+                                 alt="Pães caseiros quentinhos" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl shadow-sm h-48 w-full">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/600x600/4A6B5D/FAF8F5?text=Cafe+Colonial'" 
+                                 alt="Mesa de café da manhã" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl shadow-sm h-48 w-full col-span-2">
+                            <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                                 onerror="this.src='https://placehold.co/600x600/4A6B5D/FAF8F5?text=Geleias+Caseiras'" 
+                                 alt="Doces e geleias caseiras" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 reveal delay-200">
+                    <span class="text-xs font-bold uppercase tracking-widest text-vevinha-terracotta bg-vevinha-100 px-3.5 py-1.5 rounded-full">
+                        Sabor Inconfundível
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-4xl font-bold text-vevinha-900 mt-4 mb-5">
+                        O Verdadeiro Café Artesanal da Vó Vevinha
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-light">
+                        Acordar na pousada é ser presentado com o aroma irresistível de café passado na hora, pão de queijo quentinho assado na hora e broas tradicionais.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-wheat-awn text-vevinha-terracotta text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-xs sm:text-sm">Receitas Tradicionais da Vó</h4>
+                                <p class="text-xs text-slate-500">Bolos de milho, fubá cremoso e biscoitos caseiros.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-cheese text-vevinha-terracotta text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-xs sm:text-sm">Queijos Fregueses & Geleias</h4>
+                                <p class="text-xs text-slate-500">Queijo Minas fresco, curado e doces caseiros da região.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-apple-whole text-vevinha-terracotta text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-xs sm:text-sm">Frutas & Sucos Naturais</h4>
+                                <p class="text-xs text-slate-500">Sucos feitos da fruta natural sem conservantes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20saber%20os%20hor%C3%A1rios%20e%20fazer%20uma%20reserva%20na%20Pousada%20V%C3%B3%20Vevinha." 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full font-bold text-xs sm:text-sm transition shadow-md hover:-translate-y-1">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Consultar no WhatsApp</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tourist Attractions Section / Fotos das Atrações Turísticas da Cidade -->
+    <section id="atracoes" class="py-14 sm:py-20 bg-vevinha-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-10 reveal">
+                <span class="text-xs font-bold uppercase tracking-widest text-vevinha-600 bg-white px-3.5 py-1.5 rounded-full shadow-sm">
+                    Roteiro Turístico
+                </span>
+                <h2 class="font-serif text-2xl sm:text-4xl font-bold text-vevinha-900 mt-4 mb-3">
+                    Conheça as Atrações Turísticas da Cidade
+                </h2>
+                <p class="text-slate-600 text-xs sm:text-sm font-light">
+                    Hospedando-se na Pousada Vó Vevinha, você estará muito próximo dos pontos turísticos mais bonitos e famosos da nossa região.
+                </p>
+            </div>
+
+            <!-- Attractions Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Attraction 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-vevinha-200 group reveal">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Cachoeiras'" 
+                             alt="Cachoeira da Região" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <span class="absolute top-3 left-3 bg-vevinha-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+                            <i class="fa-solid fa-water mr-1"></i> Ecoturismo
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-serif text-lg font-bold text-vevinha-900 mb-1">Cachoeiras Cristalinas</h3>
+                        <p class="text-xs text-slate-500 mb-3">Poços naturais limpos para banho, de fácil acesso e cercados por mata atlântica.</p>
+                        <span class="text-[11px] font-semibold text-vevinha-terracotta block">
+                            <i class="fa-solid fa-location-dot mr-1"></i> 15 minutos da Pousada
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Attraction 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-vevinha-200 group reveal delay-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Centro+Historico'" 
+                             alt="Centro Histórico e Feirinha" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <span class="absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+                            <i class="fa-solid fa-store mr-1"></i> Compras & Cultura
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-serif text-lg font-bold text-vevinha-900 mb-1">Centro Histórico & Feiras</h3>
+                        <p class="text-xs text-slate-500 mb-3">Lojas de artesanato local, chocolates artesanais, doces de compota e cafeterias.</p>
+                        <span class="text-[11px] font-semibold text-vevinha-terracotta block">
+                            <i class="fa-solid fa-location-dot mr-1"></i> Centro da Cidade
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Attraction 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-vevinha-200 group reveal delay-200">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Mirantes'" 
+                             alt="Mirante das Montanhas" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <span class="absolute top-3 left-3 bg-indigo-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+                            <i class="fa-solid fa-mountain mr-1"></i> Vista Panorâmica
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-serif text-lg font-bold text-vevinha-900 mb-1">Mirante do Pôr do Sol</h3>
+                        <p class="text-xs text-slate-500 mb-3">O ponto mais alto da cidade para contemplar as montanhas e registrar fotos incríveis.</p>
+                        <span class="text-[11px] font-semibold text-vevinha-terracotta block">
+                            <i class="fa-solid fa-location-dot mr-1"></i> Rota Gastronômica
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Attraction 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-vevinha-200 group reveal delay-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://abartquadros.cdn.magazord.com.br/img/2024/12/produto/2839/77-s.jpg?ims=fit-in/850x850/filters:fill(white)" 
+                             onerror="this.src='https://placehold.co/800x600/4A6B5D/FAF8F5?text=Vinhos+e+Queijos'" 
+                             alt="Rota dos Vinhos e Queijos" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <span class="absolute top-3 left-3 bg-rose-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10">
+                            <i class="fa-solid fa-wine-glass mr-1"></i> Degustação
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-serif text-lg font-bold text-vevinha-900 mb-1">Vinícolas & Alambiques</h3>
+                        <p class="text-xs text-slate-500 mb-3">Tours guiados com degustação de queijos artesanais, cachaças e vinhos locais.</p>
+                        <span class="text-[11px] font-semibold text-vevinha-terracotta block">
+                            <i class="fa-solid fa-location-dot mr-1"></i> Rota Serrana
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- WhatsApp Touristic Dicas Banner -->
+            <div class="mt-10 bg-vevinha-600 rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md hover:shadow-lg transition-shadow duration-300 reveal">
+                <div class="text-center md:text-left">
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold mb-2">Quer dicas personalizadas de passeios?</h3>
+                    <p class="text-vevinha-100 text-xs sm:text-sm font-light">Nossa equipe envia roteiros sob medida diretamente no seu WhatsApp!</p>
+                </div>
+                <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20receber%20dicas%20de%20passeios%20e%20atra%C3%A7%C3%B5es%20da%20cidade." 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-6 py-3 rounded-full text-xs sm:text-sm transition duration-200 whitespace-nowrap shadow-lg hover:-translate-y-1 flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Pedir Dicas no WhatsApp</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Contato & WhatsApp Main CTA Section -->
+    <section id="contato" class="py-14 sm:py-20 bg-vevinha-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                
+                <!-- Direct WhatsApp Banner Card -->
+                <div class="bg-white/5 p-6 sm:p-8 rounded-3xl border border-white/10 text-center sm:text-left reveal">
+                    <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto sm:mx-0 mb-4 hover:scale-110 transition-transform duration-300">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold mb-3">
+                        Reserve Diretamente pelo WhatsApp
+                    </h2>
+                    <p class="text-vevinha-100 text-xs sm:text-sm font-light leading-relaxed mb-6">
+                        Para garantir o melhor atendimento e tirar dúvidas sobre datas, valores e pacotes especiais, fale diretamente conosco no WhatsApp!
+                    </p>
+
+                    <a href="https://wa.me/5535997237258?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20minha%20hospedagem%20na%20Pousada%20V%C3%B3%20Vevinha." 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-6 rounded-2xl transition duration-300 hover:-translate-y-1 flex items-center justify-center gap-3 shadow-xl text-base">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>Iniciar Conversa no WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Location Info -->
+                <div class="space-y-4 reveal delay-200">
+                    <div class="bg-white/5 p-6 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors duration-300">
+                        <h3 class="font-serif text-xl font-bold text-amber-300 mb-4">Informações de Contato</h3>
+                        <ul class="space-y-4 text-xs sm:text-sm text-vevinha-100 font-light">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-vevinha-terracotta text-base mt-0.5"></i>
+                                <span>Luminárias, MG</span>
+                            </li>
+                            <li class="flex items-center gap-3 hover:text-emerald-400 transition-colors cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                                <span>WhatsApp: (35) 99723-7258</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-clock text-vevinha-terracotta text-base"></i>
+                                <span>Atendimento WhatsApp: 08:00 às 22:30</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-vevinha-900 border-t border-white/10 text-vevinha-200 text-xs py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-vevinha-600 text-white flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <span class="font-serif text-base font-bold text-white">Pousada Vó Vevinha</span>
+                </div>
+
+                <p class="text-slate-400">
+                    © <span id="current-year"></span> Pousada Vó Vevinha. Todos os direitos reservados.
+                </p>
+
+                <div class="flex items-center gap-4 text-slate-300">
+                    <a href="https://www.instagram.com/pousada_vovevinha/" target="_blank" class="hover:text-white hover:scale-110 transition-all flex items-center gap-1"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    <a href="https://wa.me/5535997237258" target="_blank" class="hover:text-emerald-400 hover:scale-110 transition-all flex items-center gap-1"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu drawer toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // SCRIPTS DOS EFEITOS ESPECIAIS (Scroll Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Se quiser que o efeito ocorra só na primeira vez que rolar, descomente a linha abaixo
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15, // O elemento tem que aparecer 15% na tela para a animação começar
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>
